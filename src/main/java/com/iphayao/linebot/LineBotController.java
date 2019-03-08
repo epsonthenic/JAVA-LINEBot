@@ -41,9 +41,14 @@ import java.util.concurrent.ExecutionException;
 @Slf4j
 @LineMessageHandler
 public class LineBotController {
+
     @Autowired
     private LineMessagingClient lineMessagingClient;
 
+//    private String pathImageFlex = new ClassPathResource("richmenu/richmenu-flexs.jpg").getFilename();
+//    private String pathConfigFlex = new ClassPathResource("richmenu/richmenu-flexs.yml").getFilename();
+
+//    RichMenuHelper.createRichMenu(lineMessagingClient, pathConfigFlex, pathImageFlex, userId);
 
     /////////////////////////////รับข้อความ////////////////////////////////
     @EventMapping
@@ -129,7 +134,6 @@ public class LineBotController {
     private void handleTextContent(String replyToken, Event event, TextMessageContent content) throws IOException {
         String text = content.getText();
         String userId = event.getSource().getUserId();
-
         switch (text) {
             case "Flex": {
                 String pathImageFlex = new ClassPathResource("richmenu/richmenu-flexs.jpg").getFile().getAbsolutePath();
@@ -166,9 +170,6 @@ public class LineBotController {
                 break;
             }
             default:
-                String pathImageFlex = new ClassPathResource("richmenu/richmenu-flexs.jpg").getFile().getAbsolutePath();
-                String pathConfigFlex = new ClassPathResource("richmenu/richmenu-flexs.yml").getFile().getAbsolutePath();
-                RichMenuHelper.createRichMenu(lineMessagingClient, pathConfigFlex, pathImageFlex, userId);
                 boolean hasText = text.contains("@");
                 boolean hasText3 = text.contains("ขอเข้ากลุ่ม");
                 if (hasText3 == true) {
